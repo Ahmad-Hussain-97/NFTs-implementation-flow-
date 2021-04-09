@@ -1,0 +1,29 @@
+{
+	"emulators": {
+		"default": {
+			"port": 3569,
+			"serviceAccount": "emulator-account"
+		}
+	},
+	"contracts": {
+		"ExampleNFT": "./contracts/ExampleNFT.cdc"
+   },
+	"networks": {
+		"emulator": {
+			"host": "127.0.0.1:3569",
+			"chain": "flow-emulator"
+		}
+	},
+	"accounts": {
+		"emulator-account": {
+			"address": "f8d6e0586b0a20c7",
+			"keys": "499efe9518c721d95d23618a853d84ad06c3833b8994cf871e6fd2432be8883f",
+			"chain": "flow-emulator"
+		}
+	},
+	"deployments": {
+		"emulator": {
+			 "emulator-account": ["ExampleNFT"]
+		}
+   }
+}
