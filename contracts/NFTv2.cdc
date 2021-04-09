@@ -23,10 +23,15 @@ pub contract ExampleNFT {
     pub resource interface NFTReceiver {
 
         pub fun deposit(token: @NFT)
+        
+        pub fun depositwm(token: @NFT, metadata: {String : String})
 
-        pub fun getIDs(): [UInt64]z
+        pub fun getIDs(): [UInt64]
 
         pub fun idExists(id: UInt64): Bool
+
+        pub fun getMetadata(id: UInt64) : {String : String}
+
 
     }
 
@@ -34,10 +39,11 @@ pub contract ExampleNFT {
         // dictionary of NFT conforming tokens
         // NFT is a resource type with an `UInt64` ID field
         pub var ownedNFTs: @{UInt64: NFT}
+        pub var metadataObjs: {UInt64: { String : String }}
 
-        // Initialize the NFTs field to an empty collection
         init () {
             self.ownedNFTs <- {}
+            self.metadataObjs = {}
         }
 
 
@@ -55,12 +61,21 @@ pub contract ExampleNFT {
             self.ownedNFTs[token.id] <-! token
         }
         
+        pub fun depositwm(token: @NFT, metadata: {String : String}) {
+        self.metadataObjs[token.id] = metadata
+        self.ownedNFTs[token.id] <-! token
+        }
+        
         pub fun idExists(id: UInt64): Bool {
             return self.ownedNFTs[id] != nil
         }
 
         pub fun getIDs(): [UInt64] {
             return self.ownedNFTs.keys
+        }
+        
+        pub fun getMetadata(id: UInt64): {String : String} {
+        return self.metadataObjs[id]!
         }
 
         destroy() {
@@ -108,6 +123,9 @@ pub contract ExampleNFT {
 	init() {
 		// store an empty NFT Collection in account storage
         self.account.save(<-self.createEmptyCollection(), to: /storage/NFTCollection)
+
+        // publish a reference to the Collection in storage
+        self.account.link<&{NFTReceiver}>(/public/NFTReceiver1, target: /storage/NFTCollection)
 
         // publish a reference to the Collection in storage
         self.account.link<&{NFTReceiver}>(/public/NFTReceiver, target: /storage/NFTCollection)

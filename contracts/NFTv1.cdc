@@ -1,18 +1,18 @@
-pub contract ExampleNFT {
+// pub contract ExampleNFT {
 
-    pub resource NFT {
+//     pub resource NFT {
 
-        pub let id: UInt64
-        pub var metadata: {String: String}
+//         pub let id: UInt64
+//         pub var metadata: {String: String}
 
-        init(initID: UInt64) {
-            self.id = initID
-            self.metadata = {}
-        }
-    }
+//         init(initID: UInt64) {
+//             self.id = initID
+//             self.metadata = {}
+//         }
+//     }
 
-	init() {
-		self.account.save<@NFT>(<-create NFT(initID: 1), to: /storage/NFT1)
-	}
-}
+// 	init() {
+// 		self.account.save<@NFT>(<-create NFT(initID: 1), to: /storage/NFT1)
+// 	}
+// }
  

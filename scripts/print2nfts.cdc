@@ -18,4 +18,3 @@ pub fun main() {
     log("Account 2 NFTs")
     log(receiverRef.getIDs())
 }
- 

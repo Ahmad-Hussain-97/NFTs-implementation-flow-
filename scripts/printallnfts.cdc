@@ -11,7 +11,7 @@ pub fun main() {
 	let account2 = getAccount(0x179b6b1cb6755e31)
 
     // Find the public Receiver capability for their Collections
-    let acct1Capability = account1.getCapability(/public/NFTReceiver)
+    let acct1Capability = account1.getCapability(/public/NFTReceiver1)
     let acct2Capability = account2.getCapability(/public/NFTReceiver)
 
     // borrow references from the capabilities
@@ -27,3 +27,4 @@ pub fun main() {
     log("Account 2 NFTs")
     log(receiver2Ref.getIDs())
 }
+ 

@@ -16,7 +16,7 @@ transaction {
         log("Collection created for account 1")
 
         // create a public capability for the Collection
-        acct.link<&{ExampleNFT.NFTReceiver}>(/public/NFTReceiver, target: /storage/NFTCollection)
+        acct.link<&{ExampleNFT.NFTReceiver}>(/public/NFTReceiver1, target: /storage/NFTCollection)
 
         log("Capability created")
     }
